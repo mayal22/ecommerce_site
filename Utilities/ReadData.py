@@ -13,7 +13,7 @@ class LoginData:
         return frontend
     @staticmethod
     def get_backend():
-        backend = config.get("login data","backend")
+        backend = config.get("site urls","backend")
         return backend
     @staticmethod
     def get_password():
