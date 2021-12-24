@@ -30,47 +30,55 @@ class basic:
                 cls.drivers.execute_script("window.scrollTo(0,6000)")
                 time.sleep(10)
                 values.click()
-                # try:
-                valuess = cls.drivers.find_element(By.CSS_SELECTOR,message)
-                WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
-                time.sleep(2)
-                # except:
+                # # try:
+                # valuess = cls.drivers.find_element(By.CSS_SELECTOR,message)
+                # WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
+                # time.sleep(2)
+                # # except:
 
             elif locator == 2:
                 values= cls.drivers.find_element(By.ID,elementt)
                 valuess = cls.drivers.find_element(By.CSS_SELECTOR,message)
                 WebDriverWait(cls.drivers,15).until(EC.visibility_of(values))
                 values.click()
-                WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
+                
+                # WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
             elif locator == 3:
                 values =cls.drivers.find_element(By.TAG_NAME,elementt)
                 valuess = cls.drivers.find_element(By.CSS_SELECTOR,message)
                 WebDriverWait(cls.drivers,15).until(EC.visibility_of(values))
                 values.click()
-                WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
+                # WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
             elif locator ==4:
                 values = cls.drivers.find_element(By.CLASS_NAME,elementt)
                 WebDriverWait(cls.drivers,15).until(EC.visibility_of(values))
                 valuess = cls.drivers.find_element(By.CSS_SELECTOR,message)
                 values.click()
-                WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
+                # WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
             elif locator ==5:
                 values =cls.drivers.find_element(By.XPATH,elementt)
                 valuess = cls.drivers.find_element(By.CSS_SELECTOR,message)
                 WebDriverWait(cls.drivers,15).until(EC.visibility_of(values))
                 values.click()
-                WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
+                # WebDriverWait(cls.drivers,10).until(EC.visibility_of(valuess))
+            try:
+                cls.drivers.find_element(By.CSS_SELECTOR,User_Management.cap_successful_alert())
+            except:
+                cls.drivers.find_element(By.CSS_SELECTOR,User_Management.cap_error_alert())
+                
         # except:
             # print(f"locator value is invalid like , locators value range between 1 to 5\n Your present value is {locator}")
-            return valuess.text
+            # return valuess.text
     @classmethod
-    def alert_messages(cls,message_type= "success"):
-        if message_type == "success":
-            element_to_find = cls.drivers.find_element(By.CSS_SELECTOR,User_Management.cap_successful_alert())
-            print(element_to_find.text)
-        if message_type == "failure":
-            element_to_find = cls.drivers.find_element(By.CSS_SELECTOR,User_Management.cap_error_alert())
-            print(element_to_find.text)
+    def success_alert_messages(cls):
+        try:
+            success_element = cls.drivers.find_element(By.CSS_SELECTOR,User_Management.cap_successful_alert())
+            WebDriverWait(cls.drivers,10).until(EC.visibility_of(success_element))
+            return success_element.text.split("\n")
+        except:
+            failed_element = cls.drivers.find_element(By.CSS_SELECTOR,User_Management.cap_error_alert())
+            WebDriverWait(cls.drivers,10).until(EC.visibility_of(failed_element))
+            return failed_element.text.split("\n")
             
 
 
