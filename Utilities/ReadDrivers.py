@@ -22,6 +22,8 @@ class LoginDrivers:
     def cap_remember():
         remember = config.get("login drivers","remember checkbox id")
         return remember
+
+
 class User_Management():
     @staticmethod
     def cap_menu():
@@ -75,4 +77,12 @@ class User_Management():
     def cap_submitUser():
         createUserButtons = config.get("user management drivers","submit button css")
         return createUserButtons
+    @staticmethod
+    def cap_successful_alert():
+        alert = config.get("user management drivers","create successfully message css")
+        return alert
+    @staticmethod
+    def cap_error_alert():
+        error = config.get("user management drivers","warning message css")
+        return error
     

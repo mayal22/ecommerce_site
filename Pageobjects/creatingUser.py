@@ -1,4 +1,7 @@
 import time
+
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from Pageobjects.login import Logins
 from Utilities.ReadDrivers import User_Management
 from Utilities.ReadData import Links
@@ -24,17 +27,24 @@ class CreatingUser(Logins):
         for each in boxes:
             inputt = each.find_element(By.TAG_NAME,"input")
             if inputt.get_attribute("name") == "status" and active == False:
-                self.driver.implicitly_wait(3)
-                time.sleep(5)
-                inputt.click()
+                try:
+                    WebDriverWait(self.driver,15).until(EC.visibility_of(inputt))
+                    inputt.click()
+                except:
+                    print("not clickable due to non-defined error")
             if inputt.get_attribute("name") == "confirmed" and confirmed == False:
                 self.driver.implicitly_wait(3)
-                time.sleep(5)
-                inputt.click()
+                try:
+                    WebDriverWait(self.driver,15).until(EC.visibility_of(inputt))
+                    inputt.click()
+                except:
+                    print("not clickable due to non-defined error")
             if inputt.get_attribute("name") == "confirmation_email" and send_email == True:
-                breakpoint()
-                inputt.click()
-                time.sleep(3)
+                try:
+                    WebDriverWait(self.driver,15).until(EC.visibility_of(inputt))
+                    inputt.click()
+                except:
+                    print("not clickable due to non-defined error")
     def Associated_Roles(self,role):
         all_roles = self.driver.find_elements(By.CLASS_NAME,User_Management.cap_radiobuttons())
         available_roles = []
